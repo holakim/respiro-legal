@@ -1,0 +1,266 @@
+<!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Respiro — Gizlilik Politikası / Privacy Policy</title><style>body{font:16px/1.6 -apple-system,system-ui,sans-serif;max-width:760px;margin:0 auto;padding:24px 16px;color:#1a1a1a}h1{font-size:1.6em}h2{font-size:1.2em;margin-top:1.8em}h3{font-size:1.05em}table{border-collapse:collapse;width:100%;font-size:.92em}td,th{border:1px solid #ddd;padding:6px;text-align:left;vertical-align:top}hr{margin:3em 0}a{color:#0F7A6F}nav{font-size:.9em;margin-bottom:1.5em}</style></head><body><nav><a href="privacy.html">Gizlilik</a> · <a href="terms.html">Koşullar</a> · <a href="veri-silme.html">Veri silme</a> · <a href="support.html">Destek</a></nav><h1>Gizlilik Politikası — Respiro</h1>
+<p><strong>Veri sorumlusu:</strong> Respiro · Ali Güzel
+<strong>Yürürlük tarihi:</strong> 29 Ekim 2026
+<strong>İletişim:</strong> devaikaga@gmail.com</p>
+<p>Respiro, gizlilik-öncelikli bir sağlık ve beslenme günlüğü uygulamasıdır. Bu politika; hangi
+verileri işlediğimizi, nerede sakladığımızı, neden ve ne kadar süreyle tuttuğumuzu, kimlerle
+paylaştığımızı ve sizin haklarınızı açıklar. Politika, Türkiye 6698 sayılı Kişisel Verilerin
+Korunması Kanunu (KVKK) ve Avrupa Birliği Genel Veri Koruma Tüzüğü (GDPR) ile uyumlu olacak
+şekilde hazırlanmıştır.</p>
+<h2>Temel ilke: Veriler varsayılan olarak cihazınızda kalır (local-first)</h2>
+<p>Respiro <strong>local-first</strong> çalışır. Tuttuğunuz tüm kayıtlar — öğünler, belirtiler, ilaç ve
+takviyeler, alerjenler, günlük notları ve tahlil notları — varsayılan olarak yalnızca cihazınızda,
+yerel bir SQLite veritabanında (expo-sqlite) saklanır. <strong>Varsayılan ayarlarda hiçbir kişisel
+veriniz cihazdan dışarı çıkmaz.</strong> Veri yalnızca aşağıda açıkça belirtilen, sizin elle açtığınız
+opsiyonel özellikler etkinleştirildiğinde işlenmek üzere cihazdan ayrılır.</p>
+<h2>İşlenen veriler, nerede saklanır, neden ve hukuki dayanak</h2>
+<h3>1) Cihazda saklanan sağlık ve günlük kayıtları</h3>
+<ul>
+<li><strong>Ne:</strong> Öğünler, belirtiler, ilaç/takviye kayıtları, alerjenler, günlük notları, tahlil notları.</li>
+<li><strong>Nerede:</strong> Yalnızca cihazınızdaki yerel SQLite veritabanı (expo-sqlite).</li>
+<li><strong>Neden:</strong> Uygulamanın temel işlevi — kendi sağlık günlüğünüzü tutmanız.</li>
+<li><strong>Hukuki dayanak (KVKK m.5 / GDPR m.6-9):</strong> Açık rızanız ve sözleşmenin ifası. Sağlık verisi
+  özel nitelikli kişisel veri olduğundan işleme açık rızanıza dayanır.</li>
+</ul>
+<h3>2) Cihazda güvenli depolanan tercihler ve sırlar</h3>
+<ul>
+<li><strong>Ne:</strong> Dil tercihi, tema, KVKK rıza damgası, (varsa) opsiyonel yapay zekâ API anahtarlarınız ve
+  senkron parolanızdan türetilen şifreleme anahtarı.</li>
+<li><strong>Nerede:</strong> Cihazın güvenli alanı (expo-secure-store → iOS Keychain / Android Keystore).</li>
+<li><strong>Neden:</strong> Tercihlerinizi korumak ve şifreleme anahtarlarını güvenli tutmak.</li>
+</ul>
+<h3>3) Opsiyonel uçtan uca şifreli senkron (varsayılan KAPALI)</h3>
+<p>Bu özelliği elle açarsanız:
+- <strong>Giriş:</strong> E-posta adresinizle tek kullanımlık kod (OTP) ile kimlik doğrulaması yaparsınız.
+- <strong>Şifreleme:</strong> Her kaydınız <strong>cihazınızda</strong>, parolanızdan scrypt ile türetilen bir anahtar
+  kullanılarak tweetnacl (Curve25519 secretbox) ile şifrelenir.
+- <strong>Sunucuya giden:</strong> Yalnızca <strong>şifreli veri blob'u</strong> ve giriş için e-posta adresiniz. Sunucu
+  içeriği <strong>göremez (zero-knowledge / sıfır bilgi)</strong> — şifre çözme anahtarı yalnızca sizdedir.
+- <strong>İşleyen:</strong> Supabase (barındırma ve depolama hizmeti sağlayıcısı / veri işleyen).
+- <strong>Hukuki dayanak:</strong> Açık rızanız (özelliği açarak verirsiniz).</p>
+<h3>4) Opsiyonel bulut yapay zekâ: koç soruları ve fotoğraftan yemek tanıma (varsayılan KAPALI)</h3>
+<p>Varsayılan yapay zekâ sağlayıcısı <strong>Apple Yapay Zekâ</strong>dır (Apple Intelligence destekli cihazlarda): yanıtlar
+Apple'ın cihaz üzerindeki modeliyle <strong>tamamen cihazınızda, ağ bağlantısı olmadan</strong> üretilir; veriler ne bize ne
+Apple'a gönderilir. Destekli olmayan cihazlarda yanıtlar yine cihaz içinde, kural tabanlı olarak üretilir.
+Profil → Yapay zekâ sağlayıcısı ekranından bir bulut sağlayıcı seçerseniz ve ilgili özelliği kullanırsanız:
+- <strong>Respiro bulutu (şu an kullanıma kapalı, "Yakında"):</strong> Etkinleştirildiğinde sorduğunuz soru ve ilgili kayıtlarınızın bir <strong>özeti</strong> (koç) veya çektiğiniz <strong>öğün
+  fotoğrafı</strong> (yemek tanıma), Respiro sunucusu (Supabase edge function) üzerinden NVIDIA altyapısında
+  barındırılan Llama modellerine iletilir. Hesap veya e-posta gerekmez.
+- <strong>Kendi Gemini / OpenAI anahtarınız:</strong> Aynı veriler <strong>doğrudan cihazınızdan</strong> Google (Gemini) veya OpenAI'ye
+  gönderilir. Anahtarınız yalnızca cihazınızın güvenli alanında saklanır; bize iletilmez.
+- Uygulama bu verileri sağlayıcıya göndermeden önce bulut sağlayıcıyı sizin seçmenizi ister; dilediğiniz an
+  cihaz içi sağlayıcıya dönebilirsiniz.
+- <strong>Cihazda yerel model (deneysel):</strong> Seçerseniz küçük bir dil modeli ilk kullanımda bir kez internetten
+  indirilir; sonrasında sorularınız tamamen cihazınızda işlenir.
+- <strong>Önemli:</strong> Yapay zekâ özellikleri tıbbi tanı veya tedavi vermez.
+- <strong>Hukuki dayanak:</strong> Açık rızanız (sağlayıcıyı seçerek ve özelliği kullanarak verirsiniz).</p>
+<h3>5) Barkod tarama (Open Food Facts)</h3>
+<p>Bir ürün barkodu tararsanız, <strong>yalnızca barkod numarası</strong> açık veri tabanı Open Food Facts API'sine
+sorgulanır (ürün adı ile içerik/alerjen bilgisini almak için). <strong>Hiçbir kişisel veriniz
+gönderilmez.</strong></p>
+<h3>6) Cihaz izinleri (hepsi sizin onayınızla)</h3>
+<ul>
+<li><strong>Kamera:</strong> Barkod tarama ve öğün fotoğrafı.</li>
+<li><strong>Mikrofon ve konuşma tanıma:</strong> Sesli not — konuşmadan metne çevirme cihaz üzerinde yapılır.</li>
+<li><strong>Bildirimler:</strong> Yerel zamanlı hatırlatmalar (örn. öğün sonrası), expo-notifications ile cihazda
+  planlanır. İzin opsiyoneldir.</li>
+<li><strong>Galeri/Fotoğraflar:</strong> Öğüne fotoğraf eklemek için.</li>
+<li><strong>Sağlık verisi (yalnız Android, Health Connect):</strong> İzin verirseniz adım, uyku, nabız gibi veriler cihazda
+  okunur ve yalnızca cihazdaki kayıtlarınıza eklenir.</li>
+</ul>
+<p>Bu izinler yalnızca ilgili özelliği kullandığınızda istenir ve dilediğiniz an cihaz ayarlarından
+geri alınabilir.</p>
+<h2>Verilerinizi paylaştığımız taraflar</h2>
+<p>Verilerinizi <strong>satmıyoruz.</strong> Uygulamada <strong>reklam SDK'sı yoktur</strong> ve <strong>üçüncü taraf analitik
+aracı kullanmıyoruz.</strong> Veri yalnızca aşağıdaki durumlarda, yalnızca siz ilgili opsiyonu açtığınızda
+paylaşılır:</p>
+<table>
+<thead>
+<tr>
+<th>Taraf</th>
+<th>Ne paylaşılır</th>
+<th>Neden</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Supabase</td>
+<td>Şifreli veri blob'u + e-posta (yalnız senkron açıksa)</td>
+<td>Barındırma/depolama</td>
+</tr>
+<tr>
+<td>Open Food Facts</td>
+<td>Yalnızca barkod numarası</td>
+<td>Ürün/alerjen bilgisi</td>
+</tr>
+<tr>
+<td>Seçtiğiniz AI sağlayıcısı (Respiro bulutu→NVIDIA / Google Gemini / OpenAI)</td>
+<td>Soru + veri özeti veya öğün fotoğrafı (yalnız bulut sağlayıcı seçiliyse)</td>
+<td>Yapay zekâ yanıtı / yemek tanıma</td>
+</tr>
+</tbody>
+</table>
+<h2>Saklama süresi</h2>
+<ul>
+<li><strong>Cihaz kayıtları:</strong> Siz silene veya uygulamayı kaldırana kadar cihazınızda kalır.</li>
+<li><strong>Senkron edilmiş şifreli veriler:</strong> Hesabınız aktif olduğu sürece Supabase'de tutulur; hesabı
+  veya kayıtları sildiğinizde silinir.</li>
+<li><strong>Yapay zekâ koçu istekleri:</strong> Yanıt üretimi için işlenir; saklama, seçtiğiniz sağlayıcının
+  koşullarına tabidir.</li>
+</ul>
+<h2>Haklarınız</h2>
+<p>KVKK m.11 ve GDPR uyarınca; verilerinize erişme, düzeltme, silme, işlemeyi kısıtlama ve veri
+taşınabilirliği haklarına sahipsiniz. Uygulama bu hakları kullanmanız için doğrudan araçlar sunar:</p>
+<ul>
+<li><strong>Verilerimi dışa aktar:</strong> Tüm kayıtlarınızı JSON veya CSV biçiminde dışa aktarabilir, doktorunuz için PDF rapor oluşturabilirsiniz (veri
+  taşınabilirliği).</li>
+<li><strong>Hesabı sil:</strong> Yerel kayıtlarınız, bulut kayıtlarınız ve kimlik doğrulama hesabınız kalıcı
+  olarak silinir (delete-account edge function, <code>auth.admin.deleteUser</code> ile auth hesabını da
+  kaldırır). Ayrıntılar için: <a href="veri-silme.html">Veri silme</a>.</li>
+</ul>
+<p>Bu hakları kullanmak veya bir talep iletmek için: devaikaga@gmail.com</p>
+<h2>Çocukların gizliliği</h2>
+<p>Respiro sağlık verisi işlediğinden <strong>16 yaş ve üzeri</strong> için önerilir ve <strong>çocuklara yönelik
+değildir.</strong> Bilerek çocuklardan kişisel veri toplamayız.</p>
+<h2>App Store ve Google Play beyanları ile tutarlılık</h2>
+<p>Bu politika, Apple App Store "App Privacy" etiketi ve Google Play "Data Safety" beyanlarımızla
+tutarlıdır: varsayılanda veri toplanmaz; veri yalnızca siz senkron veya bir bulut yapay zekâ sağlayıcısı seçtiğinizde
+işlenir; izleme (tracking) yapılmaz, veri satılmaz.</p>
+<h2>Değişiklikler</h2>
+<p>Bu politikayı zaman zaman güncelleyebiliriz. Önemli değişikliklerde uygulama içinde bilgilendirme
+yapılır ve yürürlük tarihi güncellenir.</p>
+<h2>İletişim</h2>
+<p>Gizlilikle ilgili tüm soru ve talepleriniz için: <strong>devaikaga@gmail.com</strong></p>
+<hr />
+<h1>Privacy Policy — Respiro</h1>
+<p><strong>Data controller:</strong> Respiro · Ali Güzel
+<strong>Effective date:</strong> 29 October 2026
+<strong>Contact:</strong> devaikaga@gmail.com</p>
+<p>Respiro is a privacy-first health and nutrition journaling app. This policy explains what data we
+process, where we store it, why and for how long we keep it, who we share it with, and your rights.
+It is designed to comply with Türkiye's Law No. 6698 on the Protection of Personal Data (KVKK) and
+the European Union General Data Protection Regulation (GDPR).</p>
+<h2>Core principle: your data stays on your device by default (local-first)</h2>
+<p>Respiro is <strong>local-first</strong>. All records you keep — meals, symptoms, medications and supplements,
+allergens, daily notes, and lab notes — are stored by default only on your device, in a local
+SQLite database (expo-sqlite). <strong>With default settings, none of your personal data leaves your
+device.</strong> Data only leaves the device when you manually enable the optional features described
+below.</p>
+<h2>What we process, where it is stored, why, and the legal basis</h2>
+<h3>1) Health and journal records stored on device</h3>
+<ul>
+<li><strong>What:</strong> Meals, symptoms, medication/supplement records, allergens, daily notes, lab notes.</li>
+<li><strong>Where:</strong> Only in the local SQLite database (expo-sqlite) on your device.</li>
+<li><strong>Why:</strong> The app's core function — keeping your own health journal.</li>
+<li><strong>Legal basis (KVKK Art. 5 / GDPR Art. 6 &amp; 9):</strong> Your explicit consent and performance of the
+  service. Because health data is a special category of personal data, processing relies on your
+  explicit consent.</li>
+</ul>
+<h3>2) Preferences and secrets stored securely on device</h3>
+<ul>
+<li><strong>What:</strong> Language preference, theme, KVKK consent timestamp, your optional AI API keys (if any),
+  and the encryption key derived from your sync password.</li>
+<li><strong>Where:</strong> The device's secure storage (expo-secure-store → iOS Keychain / Android Keystore).</li>
+<li><strong>Why:</strong> To protect your preferences and keep encryption keys secure.</li>
+</ul>
+<h3>3) Optional end-to-end encrypted sync (OFF by default)</h3>
+<p>If you manually enable this feature:
+- <strong>Sign-in:</strong> You authenticate with a one-time code (OTP) sent to your email address.
+- <strong>Encryption:</strong> Each record is encrypted <strong>on your device</strong> with tweetnacl (Curve25519
+  secretbox), using a key derived from your password via scrypt.
+- <strong>Sent to the server:</strong> Only the <strong>encrypted data blob</strong> and your email address for sign-in. The
+  server <strong>cannot read the content (zero-knowledge)</strong> — the decryption key stays only with you.
+- <strong>Processor:</strong> Supabase (hosting and storage service provider / data processor).
+- <strong>Legal basis:</strong> Your explicit consent (given by enabling the feature).</p>
+<h3>4) Optional cloud AI: coach questions and meal-photo recognition (OFF by default)</h3>
+<p>The default AI provider is <strong>Apple Intelligence</strong> (on supported devices): answers are generated by Apple's
+on-device model <strong>entirely on your device, with no network connection</strong>; nothing is sent to us or to Apple.
+On unsupported devices answers are still generated on device by rule-based logic.
+If you choose a cloud provider in Profile → AI provider and use the related feature:
+- <strong>Respiro cloud (currently unavailable, "Coming soon"):</strong> When enabled, your question and a <strong>summary</strong> of your relevant records (coach) or the <strong>meal photo</strong> you
+  take (food recognition) are sent via the Respiro server (a Supabase edge function) to Llama models hosted on
+  NVIDIA infrastructure. No account or email is required.
+- <strong>Your own Gemini / OpenAI key:</strong> The same data is sent <strong>directly from your device</strong> to Google (Gemini) or
+  OpenAI. Your key is stored only in your device's secure storage and is never sent to us.
+- You must select a cloud provider before any of this data is sent; you can switch back to an on-device provider
+  at any time.
+- <strong>On-device local model (experimental):</strong> If selected, a small language model is downloaded once from the
+  internet on first use; afterwards your questions are processed entirely on your device.
+- <strong>Important:</strong> AI features do not provide medical diagnosis or treatment.
+- <strong>Legal basis:</strong> Your explicit consent (given by selecting the provider and using the feature).</p>
+<h3>5) Barcode scanning (Open Food Facts)</h3>
+<p>If you scan a product barcode, <strong>only the barcode number</strong> is queried against the open Open Food
+Facts API (to retrieve the product name and ingredient/allergen data). <strong>No personal data is
+sent.</strong></p>
+<h3>6) Device permissions (all with your consent)</h3>
+<ul>
+<li><strong>Camera:</strong> Barcode scanning and meal photos.</li>
+<li><strong>Microphone and speech recognition:</strong> Voice notes — speech-to-text is performed on device.</li>
+<li><strong>Notifications:</strong> Locally scheduled reminders (e.g. after meals) via expo-notifications. The
+  permission is optional.</li>
+<li><strong>Gallery/Photos:</strong> To attach photos to a meal.</li>
+<li><strong>Health data (Android only, Health Connect):</strong> If you allow it, data such as steps, sleep and heart rate
+  is read on device and added only to your on-device records.</li>
+</ul>
+<p>These permissions are requested only when you use the related feature and can be revoked anytime in
+your device settings.</p>
+<h2>Who we share data with</h2>
+<p>We <strong>do not sell</strong> your data. The app contains <strong>no advertising SDKs</strong> and we use <strong>no third-party
+analytics.</strong> Data is shared only in the following cases, and only when you enable the relevant
+option:</p>
+<table>
+<thead>
+<tr>
+<th>Party</th>
+<th>What is shared</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Supabase</td>
+<td>Encrypted data blob + email (only if sync is on)</td>
+<td>Hosting/storage</td>
+</tr>
+<tr>
+<td>Open Food Facts</td>
+<td>Barcode number only</td>
+<td>Product/allergen info</td>
+</tr>
+<tr>
+<td>Your chosen AI provider (Respiro cloud→NVIDIA / Google Gemini / OpenAI)</td>
+<td>Question + data summary or meal photo (only if a cloud provider is selected)</td>
+<td>AI response / food recognition</td>
+</tr>
+</tbody>
+</table>
+<h2>Retention</h2>
+<ul>
+<li><strong>On-device records:</strong> Remain on your device until you delete them or uninstall the app.</li>
+<li><strong>Synced encrypted data:</strong> Stored in Supabase while your account is active; deleted when you
+  delete your account or records.</li>
+<li><strong>AI coach requests:</strong> Processed to generate a response; retention is subject to the terms of the
+  provider you choose.</li>
+</ul>
+<h2>Your rights</h2>
+<p>Under KVKK Art. 11 and the GDPR, you have the rights to access, rectify, erase, restrict processing
+of, and port your data. The app provides direct tools to exercise these rights:</p>
+<ul>
+<li><strong>Export my data:</strong> Export all your records in JSON or CSV format and create a PDF report for your doctor (data portability).</li>
+<li><strong>Delete account:</strong> Your local records, cloud records, and authentication account are permanently
+  deleted (the delete-account edge function also removes the auth account via
+  <code>auth.admin.deleteUser</code>). See <a href="veri-silme.html">Data deletion</a> for details.</li>
+</ul>
+<p>To exercise these rights or submit a request: devaikaga@gmail.com</p>
+<h2>Children's privacy</h2>
+<p>Because Respiro processes health data, it is recommended for users <strong>aged 16 and over</strong> and is
+<strong>not directed to children.</strong> We do not knowingly collect personal data from children.</p>
+<h2>Consistency with App Store and Google Play disclosures</h2>
+<p>This policy is consistent with our Apple App Store "App Privacy" label and Google Play "Data Safety"
+disclosures: no data is collected by default; data is processed only when you enable sync or select
+a cloud AI provider; no tracking is performed and no data is sold.</p>
+<h2>Changes</h2>
+<p>We may update this policy from time to time. For significant changes, we will notify you in the app
+and update the effective date.</p>
+<h2>Contact</h2>
+<p>For all privacy questions and requests: <strong>devaikaga@gmail.com</strong></p></body></html>
