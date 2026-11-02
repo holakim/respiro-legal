@@ -1,96 +1,73 @@
 <!doctype html><html lang="tr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Respiro — Veri Silme / Data Deletion</title><style>body{font:16px/1.6 -apple-system,system-ui,sans-serif;max-width:760px;margin:0 auto;padding:24px 16px;color:#1a1a1a}h1{font-size:1.6em}h2{font-size:1.2em;margin-top:1.8em}h3{font-size:1.05em}table{border-collapse:collapse;width:100%;font-size:.92em}td,th{border:1px solid #ddd;padding:6px;text-align:left;vertical-align:top}hr{margin:3em 0}a{color:#0F7A6F}nav{font-size:.9em;margin-bottom:1.5em}</style></head><body><nav><a href="privacy.html">Gizlilik</a> · <a href="terms.html">Koşullar</a> · <a href="veri-silme.html">Veri silme</a> · <a href="support.html">Destek</a></nav><h1>Veri Silme — Respiro</h1>
 <p><strong>Sağlayıcı:</strong> Respiro · Ali Güzel
-<strong>Yürürlük tarihi:</strong> 2026
+<strong>Yürürlük tarihi:</strong> 2 Kasım 2026
 <strong>İletişim:</strong> devaikaga@gmail.com</p>
-<p>Bu sayfa, Respiro uygulamasındaki verilerinizi nasıl sileceğinizi açıklar. Respiro varsayılan
-olarak <strong>local-first</strong> çalışır: kayıtlarınız cihazınızda saklanır. Verilerinizi hem uygulama
-içinden hem de uygulama dışından (bize talep göndererek) silebilirsiniz.</p>
-<h2>Seçenek 1 — Uygulama içinden silme (önerilen)</h2>
+<p>Bu sayfa, Respiro uygulamasındaki verilerinizi nasıl sileceğinizi açıklar. Respiro <strong>local-first</strong>
+çalışır ve 1.0 sürümünde <strong>hesap, giriş, e-posta veya bulut senkronu yoktur</strong>: tüm kayıtlarınız yalnızca
+cihazınızda saklanır, sunucumuzda size ait veri bulunmaz.</p>
+<h2>Uygulama içinden silme</h2>
 <ol>
 <li>Uygulamayı açın.</li>
-<li><strong>Profil → Hesabı sil</strong> yolunu izleyin.</li>
+<li><strong>Profil → Veri &amp; Gizlilik → Tüm verilerimi sil</strong> yolunu izleyin.</li>
 <li>İşlemi onaylayın.</li>
 </ol>
-<p>Bu işlem aşağıdakileri <strong>kalıcı olarak siler:</strong>
-- Cihazınızdaki tüm yerel kayıtlar (öğünler, belirtiler, ilaç/takviyeler, alerjenler, günlük
-  notları, tahlil notları — yerel SQLite veritabanından).
-- Senkronu açtıysanız: Supabase'deki tüm şifreli bulut kayıtlarınız.
-- Kimlik doğrulama (auth) hesabınız — delete-account edge function, <code>auth.admin.deleteUser</code>
-  çağrısıyla hesabınızı sunucudan kalıcı olarak kaldırır.</p>
-<blockquote>
-<p>Not: Yalnızca yerel kullanıyorsanız (senkron hiç açılmadıysa), zaten yalnızca cihazınızda veri
-bulunur; uygulamayı kaldırmak da yerel verileri siler. "Hesabı sil" özelliği, bulut kaydı olan
-kullanıcılar için her şeyi tek seferde temizler.</p>
-</blockquote>
-<h2>Seçenek 2 — Uygulama dışından silme (talep göndererek)</h2>
-<p>Uygulamaya erişiminiz yoksa (örn. cihazınızı kaybettiyseniz) bize talep gönderebilirsiniz:</p>
-<ol>
-<li><strong>devaikaga@gmail.com</strong> adresine, hesabınıza giriş için kullandığınız <strong>e-posta adresinden</strong>
-   bir silme talebi gönderin.</li>
-<li>Konu satırına "Hesap Silme Talebi" yazın.</li>
-<li>Kimliğinizi doğruladıktan sonra hesabınızı ve buluttaki şifreli kayıtlarınızı sileriz.</li>
-</ol>
-<p><strong>Süre:</strong> Talepleri en geç <strong>30 gün</strong> içinde işleme alıp tamamlarız.</p>
-<blockquote>
-<p>Cihazınızdaki yerel verileri uzaktan silemeyiz (bunlar yalnızca sizin cihazınızdadır); yerel
-veriler için uygulama içi silmeyi kullanın veya uygulamayı kaldırın.</p>
-</blockquote>
-<h2>Ne silinir, ne kalır</h2>
+<p>Bu işlem cihazınızdan aşağıdakileri <strong>kalıcı olarak siler:</strong>
+- Tüm yerel kayıtlar (öğünler, belirtiler, ilaç/takviyeler, alerjenler, tahlil notları — yerel SQLite
+  veritabanından) ve acil durum bilgileriniz.
+- Ayarlar, KVKK rıza kaydı, bulut yapay zekâ açık onay kayıtları ve kaydettiğiniz API anahtarları
+  (iOS Keychain / Android Keystore).
+- Dışa aktarma dosyaları (CSV/PDF), öğün fotoğraflarının önbellek kopyaları ve indirilen cihaz-içi
+  modeller (yerel dil modeli, metin tanıma modeli).
+- Planlanmış hatırlatma bildirimleri.</p>
+<p>KVKK açık rızanızı geri çektiyseniz, izin ekranındaki <strong>Verilerimi sil ve çık</strong> seçeneği de aynı silmeyi
+yapar. Uygulamayı kaldırmak da yerel verileri siler.</p>
+<h2>Uygulama dışından talep</h2>
+<p>Hesap ve sunucu kaydı tutmadığımız için uzaktan silinecek bir veri yoktur; cihazınızdaki verilere
+erişimimiz de yoktur. Sorularınız için <strong>devaikaga@gmail.com</strong> adresine yazabilirsiniz; talepleri en geç
+<strong>30 gün</strong> içinde yanıtlarız.</p>
+<h2>Üçüncü taraflar</h2>
 <ul>
-<li><strong>Silinir:</strong> Yerel kayıtlar, buluttaki şifreli kayıtlar, kimlik doğrulama hesabı.</li>
-<li><strong>Kalmaz:</strong> Verilerinizi satmıyoruz; reklam veya analitik amacıyla saklanan bir kopya yoktur.</li>
-<li><strong>Sınırlama:</strong> Open Food Facts'a yalnızca barkod numarası gönderildiği ve hiçbir kişisel veri
-  iletilmediği için orada size ait silinecek bir kayıt bulunmaz. Bulut koçunu kullandıysanız, ilgili
-  yapay zekâ sağlayıcısındaki işleme/saklama o sağlayıcının koşullarına tabidir.</li>
+<li><strong>Open Food Facts:</strong> Yalnızca barkod numarası gönderilir; size ait kişisel kayıt oluşmaz.</li>
+<li><strong>Gemini / OpenAI (kendi anahtarınızla, açık onayla seçtiyseniz):</strong> Gönderilen sorular, özetler ve
+  fotoğraflar o sağlayıcının koşullarına tabidir. Silme için doğrudan Google veya OpenAI'nin veri
+  araçlarını kullanın; Respiro bu verilere erişemez.</li>
 </ul>
 <h2>İletişim</h2>
 <p>Veri silme ile ilgili her türlü soru için: <strong>devaikaga@gmail.com</strong></p>
 <hr />
 <h1>Data Deletion — Respiro</h1>
 <p><strong>Provider:</strong> Respiro · Ali Güzel
-<strong>Effective date:</strong> 2026
+<strong>Effective date:</strong> 2 November 2026
 <strong>Contact:</strong> devaikaga@gmail.com</p>
-<p>This page explains how to delete your data in the Respiro app. Respiro is <strong>local-first</strong> by
-default: your records are stored on your device. You can delete your data both from within the app
-and from outside the app (by sending us a request).</p>
-<h2>Option 1 — Delete from within the app (recommended)</h2>
+<p>This page explains how to delete your data in Respiro. Respiro is <strong>local-first</strong> and version 1.0 has
+<strong>no account, sign-in, email or cloud sync</strong>: all your records are stored only on your device and we hold
+no data about you on our servers.</p>
+<h2>Delete from within the app</h2>
 <ol>
 <li>Open the app.</li>
-<li>Go to <strong>Profile → Delete account.</strong></li>
+<li>Go to <strong>Profile → Data &amp; Privacy → Delete all my data.</strong></li>
 <li>Confirm the action.</li>
 </ol>
-<p>This <strong>permanently deletes:</strong>
-- All local records on your device (meals, symptoms, medications/supplements, allergens, daily
-  notes, lab notes — from the local SQLite database).
-- If you enabled sync: all your encrypted cloud records in Supabase.
-- Your authentication (auth) account — the delete-account edge function permanently removes your
-  account from the server via the <code>auth.admin.deleteUser</code> call.</p>
-<blockquote>
-<p>Note: If you only use the app locally (sync was never enabled), data exists only on your device;
-uninstalling the app also deletes local data. The "Delete account" feature clears everything at
-once for users who have cloud records.</p>
-</blockquote>
-<h2>Option 2 — Delete from outside the app (by request)</h2>
-<p>If you cannot access the app (e.g. you lost your device), you can send us a request:</p>
-<ol>
-<li>Send a deletion request to <strong>devaikaga@gmail.com</strong> from the <strong>email address</strong> you used to sign
-   in to your account.</li>
-<li>Use the subject line "Account Deletion Request".</li>
-<li>After we verify your identity, we will delete your account and your encrypted cloud records.</li>
-</ol>
-<p><strong>Timeframe:</strong> We process and complete requests within <strong>30 days</strong> at the latest.</p>
-<blockquote>
-<p>We cannot remotely delete the local data on your device (it resides only on your device); use the
-in-app deletion or uninstall the app for local data.</p>
-</blockquote>
-<h2>What is deleted, what remains</h2>
+<p>This <strong>permanently deletes</strong> from your device:
+- All local records (meals, symptoms, medications/supplements, allergens, lab notes — from the local
+  SQLite database) and your emergency info.
+- Settings, the KVKK consent record, cloud-AI consent records and saved API keys (iOS Keychain / Android
+  Keystore).
+- Export files (CSV/PDF), cached copies of meal photos and downloaded on-device models (local language
+  model, text-recognition model).
+- Scheduled reminder notifications.</p>
+<p>If you withdrew your KVKK consent, the <strong>Delete my data and exit</strong> option on the consent screen performs
+the same deletion. Uninstalling the app also deletes local data.</p>
+<h2>Requests from outside the app</h2>
+<p>Because we keep no accounts or server records, there is nothing to delete remotely, and we have no access
+to the data on your device. For questions, email <strong>devaikaga@gmail.com</strong>; we reply within <strong>30 days</strong> at
+the latest.</p>
+<h2>Third parties</h2>
 <ul>
-<li><strong>Deleted:</strong> Local records, encrypted cloud records, authentication account.</li>
-<li><strong>Does not remain:</strong> We do not sell your data; there is no copy retained for advertising or
-  analytics.</li>
-<li><strong>Limitation:</strong> Because only the barcode number is sent to Open Food Facts and no personal data
-  is transmitted, there is no record of yours to delete there. If you used the cloud coach, any
-  processing/retention by the relevant AI provider is subject to that provider's terms.</li>
+<li><strong>Open Food Facts:</strong> Only the barcode number is sent; no personal record of yours is created.</li>
+<li><strong>Gemini / OpenAI (with your own key, if selected with explicit consent):</strong> Questions, summaries and
+  photos sent are subject to that provider's terms. To delete them, use Google's or OpenAI's own data
+  tools; Respiro cannot access this data.</li>
 </ul>
 <h2>Contact</h2>
 <p>For any questions about data deletion: <strong>devaikaga@gmail.com</strong></p></body></html>
